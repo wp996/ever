@@ -19,7 +19,9 @@ class VectorStoreService(object):
         """返回向量检索器，方便加入chain"""
         return self.vector_store.as_retriever(search_kwargs={"k": config.similarity_threshold})
 
-
+    def get_all_chunks(self):
+        data = self.vector_store.get(include=["documents", "metadatas"])
+        return data["documents"], data["metadatas"]
 if __name__ == '__main__':
     from langchain_community.embeddings import DashScopeEmbeddings
     retriever = VectorStoreService(DashScopeEmbeddings(model="text-embedding-v4")).get_retriever()
