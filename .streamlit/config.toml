@@ -1,0 +1,8 @@
+[server]
+# 关闭文件监听：本机装了 transformers 但没装 torchvision，
+# Streamlit 启动时扫描模块路径会反复抛 "No module named 'torchvision'"，
+# 关掉后启动干净。代价：改代码后需手动刷新页面（右上角 Rerun）。
+fileWatcherType = "none"
+
+# 端口被占用时直接报错退出，不自动换端口，便于发现"旧进程还没关"
+headless = false
