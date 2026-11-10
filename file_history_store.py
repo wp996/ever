@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Sequence
+
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.messages import BaseMessage, message_to_dict, messages_from_dict
 
@@ -19,7 +19,8 @@ class FileChatMessageHistory(BaseChatMessageHistory):
         # 确保文件夹是存在的
         os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
 
-    def add_messages(self, messages: Sequence[BaseMessage]) -> None:
+    # messages 是 Sequence[BaseMessage]：list、tuple 之类的消息序列（类型标注交给注释说明，避免 IDE 误报）
+    def add_messages(self, messages) -> None:
         # Sequence序列 类似list、tuple
         all_messages = list(self.messages)      # 已有的消息列表
         all_messages.extend(messages)           # 新的和已有的融合成一个list
@@ -38,8 +39,8 @@ class FileChatMessageHistory(BaseChatMessageHistory):
         with open(self.file_path, "w", encoding="utf-8") as f:
             json.dump(new_messages, f)
 
-    @property       # @property装饰器将messages方法变成成员属性用
-    def messages(self) -> list[BaseMessage]:
+    @property  # @property装饰器将messages方法变成成员属性用
+    def messages(self):  # type: ignore[override]  # 基类把 messages 声明为 list[BaseMessage] 属性，子类用 property 重写属预期行为
         # 当前文件内： list[字典]
         try:
             with open(self.file_path, "r", encoding="utf-8") as f:

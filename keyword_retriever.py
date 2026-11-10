@@ -31,5 +31,5 @@ if __name__ == "__main__":
     docs, _ = service.get_all_chunks()
     retriever = BM25Retriever()
     retriever.build(docs)
-    for q in ["针织毛衣如何保养", "尺码怎么选", "颜色如何搭配"]:
+    for q in ["身高168cm，体重110斤，穿多大码？"]:
         print(q, retriever.retrieve(q, top_k=3))

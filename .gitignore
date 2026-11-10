@@ -4,3 +4,6 @@ __pycache__/
 chroma_db/
 chat_history/
 md5.text
+.idea/
+.vscode/
+.workbuddy/
