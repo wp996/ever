@@ -1,0 +1,39 @@
+{"id": "q01", "question": "衣服买了不想要了可以退吗", "expected_sources": ["退换货政策.txt"], "expected_keywords": ["七天无理由"], "type": "lexical", "note": "字面直接命中退货条款"}
+{"id": "q02", "question": "内衣袜子支持七天无理由退货吗", "expected_sources": ["退换货政策.txt"], "expected_keywords": ["内衣", "不支持无理由"], "type": "lexical", "note": "答案是否定的，必须命中例外条款而不是笼统的退货介绍"}
+{"id": "q03", "question": "衣服起球算质量问题吗", "expected_sources": ["质量与售后.txt"], "expected_keywords": ["不属于质量"], "type": "distractor", "note": "起球一词出现在3篇文档：质量与售后讲判定、冬季选购养护讲处理、洗涤养护顺带提及。问判定必须命中质量与售后"}
+{"id": "q04", "question": "毛衣起球了该怎么处理", "expected_sources": ["冬季选购养护.txt", "洗涤养护.txt"], "expected_keywords": ["毛球修剪器"], "type": "distractor", "note": "与q03镜像：问处理方式，质量与售后.txt（讲判定）是干扰项"}
+{"id": "q05", "question": "下单后多久发货", "expected_sources": ["物流配送.txt"], "expected_keywords": ["48小时"], "type": "lexical", "note": ""}
+{"id": "q06", "question": "新疆的运费是多少", "expected_sources": ["物流配送.txt"], "expected_keywords": ["15元"], "type": "distractor", "note": "新疆在配送时效和运费两段都出现，必须命中15元运费那段而不是时效那段"}
+{"id": "q07", "question": "优惠券领了之后多久内要用掉", "expected_sources": ["优惠券规则.txt"], "expected_keywords": ["7天内有效"], "type": "semantic", "note": "问题措辞与文档原文几乎无字面重叠"}
+{"id": "q08", "question": "618的满减能和店铺优惠券一起用吗", "expected_sources": ["优惠券规则.txt"], "expected_keywords": ["同时使用"], "type": "lexical", "note": ""}
+{"id": "q09", "question": "花呗分6期手续费是多少", "expected_sources": ["支付方式.txt"], "expected_keywords": ["2.3%"], "type": "lexical", "note": ""}
+{"id": "q10", "question": "退款多久能到账", "expected_sources": ["支付方式.txt", "订单问题.txt"], "expected_keywords": ["1-3个工作日", "3-7个"], "type": "distractor", "note": "两个来源都有到账时间，命中任一即算对"}
+{"id": "q11", "question": "怎么量自己的胸围", "expected_sources": ["尺码测量方法.txt"], "expected_keywords": ["最丰满处"], "type": "lexical", "note": ""}
+{"id": "q12", "question": "净胸围88厘米应该选多大码", "expected_sources": ["尺码测量方法.txt"], "expected_keywords": ["放松量", "92-94"], "type": "semantic", "note": "文档里有现成例子，但问题措辞不同；考验语义匹配"}
+{"id": "q13", "question": "身高170体重125斤穿什么码", "expected_sources": ["尺码推荐.txt"], "expected_keywords": ["165-175"], "type": "distractor", "note": "尺码测量方法.txt也讲尺码且含数字表，必须命中身高体重对照表"}
+{"id": "q14", "question": "皮肤偏黑适合穿什么颜色", "expected_sources": ["颜色选择.txt"], "expected_keywords": ["黑皮", "高饱和度"], "type": "semantic", "note": "皮肤偏黑与黑皮措辞不同"}
+{"id": "q15", "question": "去面试穿什么颜色比较稳妥", "expected_sources": ["颜色选择.txt"], "expected_keywords": ["面试", "深色系"], "type": "lexical", "note": ""}
+{"id": "q16", "question": "钻石会员有什么专属权益", "expected_sources": ["会员权益.txt"], "expected_keywords": ["专属客服经理", "运费全免"], "type": "lexical", "note": ""}
+{"id": "q17", "question": "一万积分能换什么东西", "expected_sources": ["会员权益.txt"], "expected_keywords": ["10000积分"], "type": "lexical", "note": "一万与10000无字面重叠，弱semantic"}
+{"id": "q18", "question": "羽绒服可以用真空压缩袋收纳吗", "expected_sources": ["冬季选购养护.txt"], "expected_keywords": ["不可真空压缩"], "type": "lexical", "note": "答案是否定的，必须命中禁止条款"}
+{"id": "q19", "question": "冬天衣服老是起静电怎么办", "expected_sources": ["冬季选购养护.txt"], "expected_keywords": ["柔顺剂", "加湿器"], "type": "semantic", "note": ""}
+{"id": "q20", "question": "莫代尔面料有什么特点", "expected_sources": ["面料知识.txt"], "expected_keywords": ["木浆"], "type": "lexical", "note": ""}
+{"id": "q21", "question": "买完东西降价了能退差价吗", "expected_sources": ["订单问题.txt"], "expected_keywords": ["差价"], "type": "semantic", "note": "价格保护的字面词未出现在问题里"}
+{"id": "q22", "question": "商家迟迟不发货有补偿吗", "expected_sources": ["订单问题.txt"], "expected_keywords": ["5%", "红包"], "type": "semantic", "note": ""}
+{"id": "q23", "question": "半夜还能找到人工客服吗", "expected_sources": ["客服与账号.txt"], "expected_keywords": ["9:00-23:00", "留言"], "type": "distractor", "note": "必须命中工作时间条款，而不是联系渠道那段"}
+{"id": "q24", "question": "客服打电话来要验证码是不是骗子", "expected_sources": ["客服与账号.txt"], "expected_keywords": ["诈骗"], "type": "lexical", "note": ""}
+{"id": "q25", "question": "梨形身材该怎么穿搭", "expected_sources": ["体型穿搭.txt"], "expected_keywords": ["亮色"], "type": "distractor", "note": "尺码测量方法.txt也提梨形身材，必须命中穿搭建议而不是尺码建议"}
+{"id": "q26", "question": "个子矮的女生怎么穿显高", "expected_sources": ["体型穿搭.txt"], "expected_keywords": ["腰线", "高腰"], "type": "semantic", "note": "个子矮与文档中的娇小无字面重叠"}
+{"id": "q27", "question": "防晒衣应该怎么洗", "expected_sources": ["夏季穿搭.txt"], "expected_keywords": ["防晒涂层"], "type": "distractor", "note": "最强干扰用例：洗涤养护.txt轻薄化纤段也写了防晒衣洗涤（建议加柔顺剂），与正确答案（禁用柔顺剂）直接冲突。重排若生效应命中夏季穿搭.txt"}
+{"id": "q28", "question": "夏天出汗多的人适合穿什么面料", "expected_sources": ["夏季穿搭.txt"], "expected_keywords": ["速干涤纶"], "type": "distractor", "note": "面料知识.txt讲透气面料但不含出汗场景的答案"}
+{"id": "q29", "question": "真丝衣服自己在家洗要注意什么", "expected_sources": ["洗涤养护.txt"], "expected_keywords": ["禁止搓揉", "专用中性洗涤剂"], "type": "lexical", "note": ""}
+{"id": "q30", "question": "羊毛衫洗完缩水了还能恢复吗", "expected_sources": ["羊毛衫专题.txt"], "expected_keywords": ["蒸汽"], "type": "distractor", "note": "第二批次新增。洗涤养护羊毛段讲怎么洗，不讲缩水恢复；干扰：养护误区.txt第6条也谈起球缩水类话题"}
+{"id": "q31", "question": "牛仔裤第一次洗怎么防止掉色", "expected_sources": ["牛仔专题.txt", "洗涤养护.txt"], "expected_keywords": ["盐水"], "type": "distractor", "note": "两篇都讲盐水固色，命中任一算对；干扰：颜色选择.txt显瘦段提到避免掉色类话题"}
+{"id": "q32", "question": "男装外套身高175体重140斤穿什么码", "expected_sources": ["男装尺码.txt"], "expected_keywords": ["130-145"], "type": "distractor", "note": "尺码推荐.txt有相近身高体重区间，必须命中男装表"}
+{"id": "q33", "question": "给7岁小孩买衣服穿多大码", "expected_sources": ["童装尺码.txt"], "expected_keywords": ["7-8岁"], "type": "semantic", "note": "问题以年龄提问，文档以年龄身高对照作答"}
+{"id": "q34", "question": "公司采购想开专用发票怎么操作", "expected_sources": ["发票规则.txt", "支付方式.txt"], "expected_keywords": ["专用发票"], "type": "distractor", "note": "两篇都讲专票，发票规则更详细；干扰：退换货政策退款段提到不开票话题"}
+{"id": "q35", "question": "尺码买大了想换小一号怎么办理", "expected_sources": ["换货规则.txt", "退换货政策.txt"], "expected_keywords": ["换货"], "type": "distractor", "note": "两篇都讲换货，干扰：尺码测量方法第6条提到免费换码"}
+{"id": "q36", "question": "羽绒服是不是充绒量越高越保暖", "expected_sources": ["羽绒服专题.txt", "冬季选购养护.txt"], "expected_keywords": ["蓬松度"], "type": "distractor", "note": "两篇都讲充绒量与蓬松度关系"}
+{"id": "q37", "question": "积分会不会过期清零", "expected_sources": ["积分活动细则.txt", "会员权益.txt"], "expected_keywords": ["清零", "24个月"], "type": "lexical", "note": "两篇都给答案：清零规则在积分细则，24个月有效期在会员权益"}
+{"id": "q38", "question": "真丝衬衫有褶皱怎么熨烫", "expected_sources": ["真丝专题.txt", "洗涤养护.txt"], "expected_keywords": ["低温"], "type": "distractor", "note": "两篇都讲真丝熨烫低温；干扰：羽绒服/羊毛衫等其它低温熨烫话题"}
+{"id": "q39", "question": "洗衣服有哪些常见的错误做法", "expected_sources": ["常见养护误区.txt"], "expected_keywords": ["误区"], "type": "lexical", "note": "泛化问题，考验主题检索；干扰：洗涤养护.txt通篇讲正确做法"}
