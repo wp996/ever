@@ -17,7 +17,7 @@ class VectorStoreService(object):
 
     def get_retriever(self):
         """返回向量检索器，方便加入chain"""
-        return self.vector_store.as_retriever(search_kwargs={"k": config.similarity_threshold})
+        return self.vector_store.as_retriever(search_kwargs={"k": config.retrieval_top_k})
 
     def get_all_chunks(self):
         data = self.vector_store.get(include=["documents", "metadatas"])

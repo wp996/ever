@@ -2,12 +2,13 @@ from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableWithMessageHistory, RunnableLambda
 from file_history_store import get_history
+from hybrid_retriever import HybridRetriever
 from vector_stores import VectorStoreService
 from langchain_community.embeddings import DashScopeEmbeddings
 import config_data as config
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_community.chat_models.tongyi import ChatTongyi
-
+from reranker import RerankerService
 
 def print_prompt(prompt):
     print("="*20)
@@ -23,6 +24,11 @@ class RagService(object):
         self.vector_service = VectorStoreService(
             embedding=DashScopeEmbeddings(model=config.embedding_model_name)
         )
+        self.embedding=DashScopeEmbeddings(model=config.embedding_model_name)
+        self.hybrid_retriever = HybridRetriever(embedding=self.embedding)
+
+
+        self.reranker = RerankerService()
 
         self.prompt_template = ChatPromptTemplate.from_messages(
             [
@@ -38,9 +44,54 @@ class RagService(object):
 
         self.chain = self.__get_chain()
 
+    def _retrieve(self, query: str) -> list[Document]:
+        mode=config.retrieval_mode
+        use_rerank = config.rerank_enabled
+        if not use_rerank:
+            doc_score_list=self.hybrid_retriever.search_with_scores(
+                query,
+                mode=mode,
+                top_k=config.retrieval_top_k,
+            )
+            docs=[]
+            for doc,score in doc_score_list:
+                new_meta={**doc.metadata,"original_score":score}
+                new_doc=Document(
+                    page_content=doc.page_content,
+                    metadata=new_meta,
+                )
+                docs.append(new_doc)
+            return docs
+        else:
+            doc_score_candidates=self.hybrid_retriever.search_with_scores(
+                query,
+                mode=mode,
+                top_k=config.rerank_candidate_k
+            )
+            rerank_result:list[dict]=self.reranker.rerank(
+                query=query,
+                candidates=doc_score_candidates,
+                top_n=config.rerank_top_n
+            )
+            docs=[]
+            for r in rerank_result:
+                new_meta={**r["metadata"],
+                         "original_score": r["original_score"],
+                          "rerank_score": r["rerank_score"]}
+                new_doc=Document(
+                    page_content=r["text"],
+                    metadata=new_meta
+                )
+                docs.append(new_doc)
+            return docs
+
+
+
+
+
     def __get_chain(self):
         """获取最终的执行链"""
-        retriever = self.vector_service.get_retriever()
+        retriever=RunnableLambda(self._retrieve)
 
         def format_document(docs: list[Document]):
             if not docs:
@@ -67,7 +118,7 @@ class RagService(object):
             {
                 "input": RunnablePassthrough(),
                 "context": RunnableLambda(format_for_retriever) | retriever | format_document
-            } | RunnableLambda(format_for_prompt_template) | self.prompt_template | print_prompt | self.chat_model | StrOutputParser()
+            } | RunnableLambda(format_for_prompt_template) | self.prompt_template  | self.chat_model | StrOutputParser()
         )
 
         conversation_chain = RunnableWithMessageHistory(
