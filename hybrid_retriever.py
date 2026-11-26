@@ -149,11 +149,13 @@ class HybridRetriever:
             return bm25_results
 
         vector_results = self._vector_search(query, limit)
-        return rrf_merge(
+
+        merged_all=rrf_merge(
             [doc for doc, _ in vector_results],
             [doc for doc, _ in bm25_results],
             k=self.rrf_k,
         )
+        return merged_all[:limit]
 
     def search(
         self,
