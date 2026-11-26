@@ -45,7 +45,7 @@ reranker_device = None               # None=自动（有 cuda 用 cuda，否则 
 # hybrid 候选池与最终条数：先召回 20~30 条，重排后取 5~8 条
 rerank_candidate_k = 20              # hybrid 粗排召回条数
 rerank_top_n = 5                     # 重排后保留条数
-rerank_enabled = True             # 总开关；单次调用仍可用 rerank=True/False 覆盖
+rerank_enabled = False            # 总开关；单次调用仍可用 rerank=True/False 覆盖
 
 # ---------- 评测 ----------
 eval_top_k = 5                       # 评测时每个问题看前几条

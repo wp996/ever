@@ -32,8 +32,12 @@ class RagService(object):
 
         self.prompt_template = ChatPromptTemplate.from_messages(
             [
-                ("system", "以我提供的已知参考资料为主，"
-                 "简洁和专业的回答用户问题。参考资料:{context}。"),
+                ("system", "你是服装电商的客服助手，只能依据下面的参考资料回答问题\n\n"
+                           "规则:\n"
+                           "1.每条结论后面必须标注来源，格式为 [来源：文件名]\n"
+                           "2.参考资料中没有提到的内容，一律不要回答，也不要用常识或外部知识补充\n"
+                           "3.如果参考资料完全不涉及用户问题，只回复这一句：参考资料中未涉及该问题。\n" 
+                           "参考资料：{context}"),
                 ("system", "并且我提供用户的对话历史记录，如下："),
                 MessagesPlaceholder("history"),
                 ("user", "请回答用户提问：{input}")
@@ -98,8 +102,10 @@ class RagService(object):
                 return "无相关参考资料"
 
             formatted_str = ""
-            for doc in docs:
-                formatted_str += f"文档片段：{doc.page_content}\n文档元数据：{doc.metadata}\n\n"
+            for idx,doc in enumerate(docs,1):
+                source=doc.metadata.get("source","未知来源")
+                formatted_str+=f"[参考文档{idx}]文件名：{source}\n[文档内容]:{doc.page_content}\n\n"
+
 
             return formatted_str
 
