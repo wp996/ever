@@ -1,0 +1,26 @@
+# 服装电商智能客服 RAG —— 依赖清单
+# 环境：Python 3.11 / Windows / CPU（无 GPU）
+# 安装：pip install -r requirements.txt
+# 注：FlagEmbedding 在部分镜像源缺失，可用阿里云源
+#     pip install FlagEmbedding==1.4.2 -i https://mirrors.aliyun.com/pypi/simple/
+
+# ---- LangChain 生态 ----
+langchain-core==1.5.6
+langchain-community==0.4.2
+langchain-text-splitters==1.1.2
+
+# ---- 模型与向量库 ----
+dashscope==1.26.7          # 通义千问对话 + text-embedding-v4 向量
+chromadb==1.5.9            # 本地持久化向量库
+FlagEmbedding==1.4.2       # bge-reranker-base 交叉编码重排
+transformers==5.15.0
+torch==2.13.0              # 默认 PyPI 版本即 CPU 版
+
+# ---- 关键词检索 ----
+jieba==0.42.1              # 中文分词，供 BM25 使用
+rank-bm25==0.2.2           # BM25 实现
+
+# ---- 应用层 ----
+streamlit==1.62.0
+python-dotenv==1.2.3
+pydantic==2.13.4
